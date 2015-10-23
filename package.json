@@ -1,0 +1,20 @@
+{
+  "name": "gw2-api",
+  "version": "0.1.0",
+  "description": "Guild Wars 2 API browser client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SergioMorchon/gw2-api.git"
+  },
+  "scripts": {
+    "mkdir:lib": "mkdir -p lib",
+    "bundle": "npm run mkdir:lib && browserify -s gw2 build/gw2-api.js > lib/gw2-api.js",
+    "build": "tsc -p src && npm run bundle"
+  },
+  "author": "Sergio Morchón Poveda",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "typescript": "1.6.2",
+    "browserify": "11.2.0"
+  }
+}
