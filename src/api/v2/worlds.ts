@@ -34,6 +34,9 @@ function getWorlds(ids: number[], lang?: string) {
 				ids
 			}
 		};
+		if (lang) {
+			request.data.lang = lang;
+		}
 		xhr(request).then(response => {
 			resolve(<World[]>JSON.parse(response));
 		}).catch(reject);
