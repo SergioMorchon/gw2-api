@@ -7,8 +7,7 @@
     "url": "https://github.com/SergioMorchon/gw2-api.git"
   },
   "scripts": {
-    "mkdir:lib": "mkdir -p lib",
-    "bundle": "npm run mkdir:lib && browserify -s gw2 build/gw2-api.js > lib/gw2-api.js",
+    "bundle": "browserify -s gw2 build/main.js > build/gw2-api.js",
     "build": "tsc -p src && npm run bundle"
   },
   "author": "Sergio Morchón Poveda",
