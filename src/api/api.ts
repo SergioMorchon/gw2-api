@@ -6,6 +6,7 @@ import * as skins from "./v2/skins";
 import * as materials from "./v2/materials";
 import * as currencies from "./v2/currencies";
 import * as quaggans from "./v2/quaggans";
+import * as files from "./v2/files";
 
 export {
 	build,
@@ -15,5 +16,6 @@ export {
 	skins,
 	materials,
 	currencies,
-	quaggans
+	quaggans,
+	files
 };
