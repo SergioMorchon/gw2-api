@@ -1,5 +1,5 @@
+import Client from "./client";
 import { BASE_URI } from "../config";
-import xhr from "../../xhr";
 
 const URI = `${BASE_URI}/v2/skins`;
 
@@ -63,40 +63,10 @@ type Skin = {
 	details?: ArmorDetails | WeaponDetails;
 };
 
-function getIds() {
-	return xhr<number[]>(URI);
-}
-
-function getSkin(id: number, lang?: string) {
-	let request: xhr.Options = {
-		uri: `${URI}/${id}`
-	};
-	if (lang) {
-		request.data.lang = lang;
+class SkinClient extends Client<number, Skin> {
+	constructor() {
+		super(URI);
 	}
-	return xhr<Skin>(request);
 }
 
-function getSkins(ids: number[], lang?: string) {
-	let request: xhr.Options = {
-		uri: URI,
-		data: {
-			ids: ids.join("\n")
-		}
-	};
-	if (lang) {
-		request.data.lang = lang;
-	}
-	return xhr<Skin[]>(request);
-}
-
-function get(id: number, lang?: string): Promise<Skin>;
-function get(ids: number[], lang?: string): Promise<Skin[]>;
-function get(idOrIds: number | number[], lang?: string): Promise<Skin | Skin[]> {
-	return typeof idOrIds === "number"? getSkin(idOrIds, lang) : getSkins(idOrIds, lang);
-}
-
-export {
-	getIds,
-	get
-};
+export default new SkinClient();

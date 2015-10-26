@@ -1,5 +1,5 @@
+import Client from "./client";
 import { BASE_URI } from "../config";
-import xhr from "../../xhr";
 
 const URI = `${BASE_URI}/v2/specializations`;
 
@@ -38,38 +38,10 @@ type Specialization = {
 	major_traits: number[];
 };
 
-function getIds() {
-	return xhr<number[]>(URI);
-}
-
-function getSpecialization(id: number, lang?: string) {
-	return new Promise((resolve, reject) => {
-		getSpecializations([id], lang).then(specializations => {
-			resolve(specializations[0]);
-		}).catch(reject);
-	});
-}
-
-function getSpecializations(ids: number[], lang?: string) {
-	let request: xhr.Options = {
-		uri: URI,
-		data: {
-			ids: ids.join(",")
-		}
-	};
-	if (lang) {
-		request.data.lang = lang;
+class SpecializationClient extends Client<number, Specialization> {
+	constructor() {
+		super(URI);
 	}
-	return xhr<Specialization[]>(request);
 }
 
-function get(id: number, lang?: string): Promise<Specialization>;
-function get(ids: number[], lang?: string): Promise<Specialization[]>;
-function get(idOrIds: number | number[], lang?: string): Promise<Specialization | Specialization[]> {
-	return typeof idOrIds === "number"? getSpecialization(idOrIds, lang) : getSpecializations(idOrIds, lang);
-}
-
-export {
-	getIds,
-	get
-};
+export default new SpecializationClient();
