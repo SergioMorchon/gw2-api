@@ -8,6 +8,7 @@ import currencies from "./v2/currencies";
 import quaggans from "./v2/quaggans";
 import files from "./v2/files";
 import achievements from "./v2/achievements";
+import traits from "./v2/traits";
 
 export {
 	build,
@@ -19,5 +20,6 @@ export {
 	currencies,
 	quaggans,
 	files,
-	achievements
+	achievements,
+	traits
 };
