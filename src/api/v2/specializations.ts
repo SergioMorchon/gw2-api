@@ -47,9 +47,20 @@ function getIds() {
 }
 
 function getSpecialization(id: number, lang?: string) {
+	return new Promise((resolve, reject) => {
+		getSpecializations([id], lang).then(specializations => {
+			resolve(specializations[0]);
+		}).catch(reject);
+	});
+}
+
+function getSpecializations(ids: number[], lang?: string) {
 	return new Promise<Specialization>((resolve, reject) => {
 		let request: xhr.Options = {
-			uri: `${URI}/${id}`
+			uri: URI,
+			data: {
+				ids: ids.join(",")
+			}
 		};
 		if (lang) {
 			request.data.lang = lang;
@@ -58,10 +69,6 @@ function getSpecialization(id: number, lang?: string) {
 			resolve(<Specialization>JSON.parse(response));
 		}).catch(reject);
 	});
-}
-
-function getSpecializations(ids: number[], lang?: string) {
-	return Promise.all(ids.map(id => getSpecialization(id)));
 }
 
 function get(id: number, lang?: string): Promise<Specialization>;
