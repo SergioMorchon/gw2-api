@@ -15,9 +15,9 @@ type Quaggan = {
 };
 
 function getIds() {
-	return new Promise<number[]>((resolve, reject) => {
+	return new Promise<string[]>((resolve, reject) => {
 		xhr(URI).then(response => {
-			resolve(<number[]>JSON.parse(response));
+			resolve(<string[]>JSON.parse(response));
 		}).catch(reject);
 	});
 }
