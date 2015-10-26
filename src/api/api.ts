@@ -4,6 +4,7 @@ import * as worlds from "./v2/worlds";
 import * as specializations from "./v2/specializations";
 import * as skins from "./v2/skins";
 import * as materials from "./v2/materials";
+import * as currencies from "./v2/currencies";
 
 export {
 	build,
@@ -11,5 +12,6 @@ export {
 	worlds,
 	specializations,
 	skins,
-	materials
+	materials,
+	currencies
 };
