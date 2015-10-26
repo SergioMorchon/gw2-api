@@ -3,7 +3,7 @@ import xhr from "../../xhr";
 
 const URI = `${BASE_URI}/v2/materials`;
 
-type material = {
+type Material = {
 	/**
 	 * The category id.
 	 */
@@ -27,7 +27,7 @@ function getIds() {
 }
 
 function getMaterial(id: number, lang?: string) {
-	return new Promise<material>((resolve, reject) => {
+	return new Promise<Material>((resolve, reject) => {
 		getMaterials([id], lang).then(materials => {
 			resolve(materials[0]);
 		}).catch(reject);
@@ -35,7 +35,7 @@ function getMaterial(id: number, lang?: string) {
 }
 
 function getMaterials(ids: number[], lang?: string) {
-	return new Promise<material>((resolve, reject) => {
+	return new Promise<Material>((resolve, reject) => {
 		let request: xhr.Options = {
 			uri: URI,
 			data: {
@@ -46,14 +46,14 @@ function getMaterials(ids: number[], lang?: string) {
 			request.data.lang = lang;
 		}
 		xhr(request).then(response => {
-			resolve(<material>JSON.parse(response));
+			resolve(<Material>JSON.parse(response));
 		}).catch(reject);
 	});
 }
 
-function get(id: number, lang?: string): Promise<material>;
-function get(ids: number[], lang?: string): Promise<material[]>;
-function get(idOrIds: number | number[], lang?: string): Promise<material | material[]> {
+function get(id: number, lang?: string): Promise<Material>;
+function get(ids: number[], lang?: string): Promise<Material[]>;
+function get(idOrIds: number | number[], lang?: string): Promise<Material | Material[]> {
 	return typeof idOrIds === "number"? getMaterial(idOrIds, lang) : getMaterials(idOrIds, lang);
 }
 
