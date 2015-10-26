@@ -12,10 +12,10 @@ function buildUriWithParams(uri: string, params: any) {
 	return `${uri}?${Object.keys(params).map(key => `${key}=${params[key]}`).join("&")}`;
 }
 
-function xhr(options: xhr.Options): Promise<string>;
-function xhr(url: string): Promise<string>;
-function xhr(optionsOrUrl: xhr.Options | string) {
-	return new Promise<string>((resolve, reject) => {
+function xhr<T>(options: xhr.Options): Promise<T>;
+function xhr<T>(url: string): Promise<T>;
+function xhr<T>(optionsOrUrl: xhr.Options | string) {
+	return new Promise<T>((resolve, reject) => {
 		
 		let options = typeof optionsOrUrl === "string"? <xhr.Options>{
 			uri: optionsOrUrl
@@ -29,7 +29,7 @@ function xhr(optionsOrUrl: xhr.Options | string) {
 
 		function doResolve() {
 			if (req.readyState === STATE_COMPLETED && req.status === STATUS_OK) {
-				resolve(req.responseText);
+				resolve(JSON.parse(req.responseText));
 			} else {
 				doReject();
 			}

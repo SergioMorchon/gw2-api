@@ -19,28 +19,20 @@ type World = {
 };
 
 function getIds() {
-	return new Promise<number[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<number[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getWorlds(ids: number[], lang?: string) {
-	return new Promise<World[]>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: URI,
-			data: {
-				ids
-			}
-		};
-		if (lang) {
-			request.data.lang = lang;
+	let request: xhr.Options = {
+		uri: URI,
+		data: {
+			ids
 		}
-		xhr(request).then(response => {
-			resolve(<World[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<World[]>(request);
 }
 
 function getWorld(id: number, lang?: string) {

@@ -64,29 +64,30 @@ type Skin = {
 };
 
 function getIds() {
-	return new Promise<number[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<number[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getSkin(id: number, lang?: string) {
-	return new Promise<Skin>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: `${URI}/${id}`
-		};
-		if (lang) {
-			request.data.lang = lang;
-		}
-		xhr(request).then(response => {
-			resolve(<Skin>JSON.parse(response));
-		}).catch(reject);
-	});
+	let request: xhr.Options = {
+		uri: `${URI}/${id}`
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<Skin>(request);
 }
 
 function getSkins(ids: number[], lang?: string) {
-	return Promise.all(ids.map(id => getSkin(id)));
+	let request: xhr.Options = {
+		uri: URI,
+		data: {
+			ids: ids.join("\n")
+		}
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<Skin[]>(request);
 }
 
 function get(id: number, lang?: string): Promise<Skin>;

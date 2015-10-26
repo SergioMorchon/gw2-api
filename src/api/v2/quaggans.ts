@@ -15,17 +15,13 @@ type Quaggan = {
 };
 
 function getIds() {
-	return new Promise<string[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<string[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getQuaggan(id: string, lang?: string) {
 	return new Promise((resolve, reject) => {
-		getQuaggans([id], lang).then(specializations => {
-			resolve(specializations[0]);
+		getQuaggans([id], lang).then(quaggans => {
+			resolve(quaggans[0]);
 		}).catch(reject);
 	});
 }
@@ -41,9 +37,7 @@ function getQuaggans(ids: string[], lang?: string) {
 		if (lang) {
 			request.data.lang = lang;
 		}
-		xhr(request).then(response => {
-			resolve(<Quaggan>JSON.parse(response));
-		}).catch(reject);
+		xhr(request).then(resolve).catch(reject);
 	});
 }
 

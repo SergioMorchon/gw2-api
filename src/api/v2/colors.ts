@@ -54,8 +54,6 @@ type ColorRequestMultiple = {
 	lang?: string;
 };
 
-type ColorIdsResponse = number[];
-
 
 function getColors(ids: number[], lang?: string) {
 	return new Promise<Color[]>((resolve, reject) => {
@@ -68,9 +66,7 @@ function getColors(ids: number[], lang?: string) {
 		if (lang) {
 			request.data.lang = lang;
 		}
-		xhr(request).then(response => {
-			resolve(<Color[]>JSON.parse(response));
-		}).catch(reject);
+		xhr(request).then(resolve).catch(reject);
 	});
 }
 
@@ -103,11 +99,7 @@ function get(idOrIds: number | number[], lang?: string): Promise<Color | Color[]
 }
 
 function getIds() {
-	return new Promise<ColorIdsResponse>((resolve, reject) => {
-		xhr(COLORS_URI).then(response => {
-			resolve(<ColorIdsResponse>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(COLORS_URI);
 }
 
 export {

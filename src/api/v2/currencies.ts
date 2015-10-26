@@ -23,36 +23,28 @@ type Currency = {
 };
 
 function getIds() {
-	return new Promise<number[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<number[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getCurrency(id: number, lang?: string) {
 	return new Promise<Currency>((resolve, reject) => {
-		getCurrencies([id], lang).then(materials => {
-			resolve(materials[0]);
+		getCurrencies([id], lang).then(currencies => {
+			resolve(currencies[0]);
 		}).catch(reject);
 	});
 }
 
 function getCurrencies(ids: number[], lang?: string) {
-	return new Promise<Currency>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: URI,
-			data: {
-				ids: ids.join(",")
-			}
-		};
-		if (lang) {
-			request.data.lang = lang;
+	let request: xhr.Options = {
+		uri: URI,
+		data: {
+			ids: ids.join(",")
 		}
-		xhr(request).then(response => {
-			resolve(<Currency>JSON.parse(response));
-		}).catch(reject);
-	});
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<Currency[]>(request);
 }
 
 function get(id: number, lang?: string): Promise<Currency>;

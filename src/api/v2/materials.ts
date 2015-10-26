@@ -19,11 +19,7 @@ type Material = {
 };
 
 function getIds() {
-	return new Promise<number[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<number[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getMaterial(id: number, lang?: string) {
@@ -35,20 +31,16 @@ function getMaterial(id: number, lang?: string) {
 }
 
 function getMaterials(ids: number[], lang?: string) {
-	return new Promise<Material>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: URI,
-			data: {
-				ids: ids.join(",")
-			}
-		};
-		if (lang) {
-			request.data.lang = lang;
+	let request: xhr.Options = {
+		uri: URI,
+		data: {
+			ids: ids.join(",")
 		}
-		xhr(request).then(response => {
-			resolve(<Material>JSON.parse(response));
-		}).catch(reject);
-	});
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<Material[]>(request);
 }
 
 function get(id: number, lang?: string): Promise<Material>;

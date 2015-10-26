@@ -15,11 +15,7 @@ type File = {
 };
 
 function getIds() {
-	return new Promise<string[]>((resolve, reject) => {
-		xhr(URI).then(response => {
-			resolve(<string[]>JSON.parse(response));
-		}).catch(reject);
-	});
+	return xhr<number[]>(URI);
 }
 
 function getFile(id: string, lang?: string) {
@@ -31,20 +27,16 @@ function getFile(id: string, lang?: string) {
 }
 
 function getFiles(ids: string[], lang?: string) {
-	return new Promise<File>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: URI,
-			data: {
-				ids: ids.join(",")
-			}
-		};
-		if (lang) {
-			request.data.lang = lang;
+	let request: xhr.Options = {
+		uri: URI,
+		data: {
+			ids: ids.join(",")
 		}
-		xhr(request).then(response => {
-			resolve(<File>JSON.parse(response));
-		}).catch(reject);
-	});
+	};
+	if (lang) {
+		request.data.lang = lang;
+	}
+	return xhr<File[]>(request);
 }
 
 function get(id: string, lang?: string): Promise<File>;

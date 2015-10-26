@@ -3,7 +3,7 @@ import xhr from "../../xhr";
 
 const URI = `${BASE_URI}/v2/build`;
 
-type Response = {
+type Build = {
 	id: number;
 };
 
@@ -15,9 +15,8 @@ type Response = {
  */
 function get() {
 	return new Promise<number>((resolve, reject) => {
-		xhr(URI).then(response => {
-			let data = <Response>JSON.parse(response);
-			resolve(data.id);
+		xhr<Build>(URI).then(response => {
+			resolve(response.id);
 		}).catch(reject);
 	});
 }
