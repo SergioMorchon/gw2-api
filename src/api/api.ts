@@ -5,6 +5,7 @@ import * as specializations from "./v2/specializations";
 import * as skins from "./v2/skins";
 import * as materials from "./v2/materials";
 import * as currencies from "./v2/currencies";
+import * as quaggans from "./v2/quaggans";
 
 export {
 	build,
@@ -13,5 +14,6 @@ export {
 	specializations,
 	skins,
 	materials,
-	currencies
+	currencies,
+	quaggans
 };
