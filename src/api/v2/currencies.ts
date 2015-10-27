@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/currencies`;
 
-type Currency = {
+export type Currency = {
 	/**
 	 * The currency's ID.
 	 */
@@ -22,7 +22,7 @@ type Currency = {
 	order: number;
 };
 
-class CurrencyClient extends Client<number, Currency> {
+export class CurrencyClient extends Client<number, Currency> {
 	constructor() {
 		super(URI);
 	}

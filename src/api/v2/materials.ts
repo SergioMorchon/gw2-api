@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/materials`;
 
-type Material = {
+export type Material = {
 	/**
 	 * The category id.
 	 */
@@ -18,7 +18,7 @@ type Material = {
 	items: number[];
 };
 
-class MaterialClient extends Client<number, Material> {
+export class MaterialClient extends Client<number, Material> {
 	constructor() {
 		super(URI);
 	}

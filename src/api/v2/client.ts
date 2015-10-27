@@ -1,8 +1,8 @@
 import xhr from "../../xhr";
 
-type XhrParams = {[name: string]: string};
+export type XhrParams = {[name: string]: string};
 
-class Client<Id, Item> {
+abstract class Client<Id, Item> {
 	private url: string;
 	
 	constructor(url: string) {
@@ -10,13 +10,7 @@ class Client<Id, Item> {
 	}
 	
 	protected xhr<T>(params?: XhrParams) {
-		let request: xhr.Options = {
-			uri: this.url
-		};
-		if (params) {
-			request.data = params;
-		}
-		return xhr<T>(request);
+		return xhr<T>(this.url, params);
 	}
 	
 	getAll(params: XhrParams = {}) {
@@ -31,18 +25,12 @@ class Client<Id, Item> {
 	get(id: Id, params?: XhrParams): Promise<Item>;
 	get(ids: Id[], params?: XhrParams): Promise<Item[]>;
 	get(idOrIds: Id | Id[], params: XhrParams = {}): Promise<Item | Item[]> {
-		let request: xhr.Options = Object.create(params);
+		let data = Object.create(params);
 		if (Array.isArray(idOrIds)) {
-		request.uri = this.url;
-			request.data = request.data || {};
-			request.data["ids"] = (<Id[]>idOrIds).join(",");
-			return xhr<Item[]>(request);
+			data["ids"] = (<Id[]>idOrIds).join(",");
+			return xhr<Item[]>(this.url, data);
 		} else {
-			request.uri = `${this.url}/${idOrIds}`;
-			if (params) {
-				request.data = params;
-			}
-			return xhr<Item>(request);
+			return xhr<Item>(`${this.url}/${idOrIds}`, params);
 		}
 	}
 }

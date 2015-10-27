@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/traits`;
 
-interface Fact {
+export type Fact = {
 	/**
 	 * An arbitrary localized string describing the fact. Not included with all facts.
 	 */
@@ -32,9 +32,9 @@ interface Fact {
      * 	- Unblockable
 	 */
 	type: string;
-}
+};
 
-interface TraitedFact extends Fact {
+export type TraitedFact = Fact & {
 	/**
 	 * Specifies which trait has to be selected in order for this fact to take effect.
 	 */
@@ -43,7 +43,7 @@ interface TraitedFact extends Fact {
 	 * This specifies the array index of the facts object it will override, if the trait specified in requires_trait is selected. If this field is omitted, then the fact contained within this object is to be appended to the existing facts array.
 	 */
 	overrides?: number;
-}
+};
 
 //#region Fact types
 type AttributeAdjust = {
@@ -57,7 +57,7 @@ type AttributeAdjust = {
 	target: string;
 };
 
-interface Buff {
+type Buff = {
 	/**
 	 * The boon, condition, or effect referred to by the fact.
 	 */
@@ -74,7 +74,7 @@ interface Buff {
 	 * The duration of the effect in seconds. Note that some facts of this type are just used to display the buff icon with text; in this case, duration is usually 0, or omitted entirely.
 	 */
 	duration?: number;
-}
+};
 
 type BuffConversion = {
 	/**
@@ -148,9 +148,9 @@ type Prefix = {
 	description: string;
 };
 
-interface PrefixedBuff extends Buff {
+type PrefixedBuff = Buff & {
 	prefix: Prefix;
-}
+};
 
 type Radius = {
 	/**
@@ -188,7 +188,7 @@ type Unblockable = {
 };
 //#endregion
 
-type Skill = {
+export type Skill = {
 	/**
 	 * The ID of the skill.
 	 */
@@ -215,7 +215,7 @@ type Skill = {
 	traited_facts?: TraitedFact[];
 };
 
-type Trait = {
+export type Trait = {
 	/**
 	 * The trait id.
 	 */
@@ -258,7 +258,7 @@ type Trait = {
 	skills?: Skill[];
 };
 
-class TraitClient extends Client<number, Trait> {
+export class TraitClient extends Client<number, Trait> {
 	constructor() {
 		super(URI);
 	}

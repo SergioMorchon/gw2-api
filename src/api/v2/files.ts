@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/files`;
 
-type File = {
+export type File = {
 	/**
 	 * The file identifier.
 	 */
@@ -14,7 +14,7 @@ type File = {
 	icon: string;
 };
 
-class FilesClient extends Client<string, File> {
+export class FilesClient extends Client<string, File> {
 	constructor() {
 		super(URI);
 	}

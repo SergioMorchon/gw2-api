@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/skins`;
 
-type ArmorDetails = {
+export type ArmorDetails = {
 	/**
 	 * The armor type (slot).
 	 */
@@ -14,7 +14,7 @@ type ArmorDetails = {
 	weight_class: string;
 };
 
-type WeaponDetails = {
+export type WeaponDetails = {
 	/**
 	 * The weapon type.
 	 */
@@ -25,7 +25,7 @@ type WeaponDetails = {
 	damage_type: string;
 };
 
-type Skin = {
+export type Skin = {
 	/**
 	 * The skin id.
 	 */
@@ -63,7 +63,7 @@ type Skin = {
 	details?: ArmorDetails | WeaponDetails;
 };
 
-class SkinClient extends Client<number, Skin> {
+export class SkinClient extends Client<number, Skin> {
 	constructor() {
 		super(URI);
 	}

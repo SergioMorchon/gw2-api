@@ -3,9 +3,9 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/colors`;
 
-type RGB = [number, number, number];
+export type RGB = [number, number, number];
 
-type DetailedInformation = {
+export type DetailedInformation = {
 	/**
 	 * The brightness
 	 */
@@ -32,7 +32,7 @@ type DetailedInformation = {
 	rgb: RGB;
 }
 
-type Color = {
+export type Color = {
 	/**
 	 * The color id.
 	 */
@@ -53,7 +53,7 @@ type Color = {
 	metal: DetailedInformation;
 };
 
-class ColorsClient extends Client<number, Color> {
+export class ColorsClient extends Client<number, Color> {
 	constructor() {
 		super(URI);
 	}

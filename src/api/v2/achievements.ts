@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/achievements`;
 
-type Achievement = {
+export type Achievement = {
 	/**
 	 * The achievement id.
 	 */
@@ -40,7 +40,7 @@ type Achievement = {
 	flags: string[];
 };
 
-class AchievementsClient extends Client<number, Achievement> {
+export class AchievementsClient extends Client<number, Achievement> {
 	constructor() {
 		super(URI);
 	}

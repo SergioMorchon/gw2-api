@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/items`;
 
-type File = {
+export type File = {
 	/**
 	 * The item id.
 	 */
@@ -108,7 +108,7 @@ type File = {
 	details?: Armor | BackItem;
 };
 
-type Armor = {
+export type Armor = {
 	/**
 	 * The armor slot type.
 	 * 	- Boots – Feet slot
@@ -150,7 +150,7 @@ type Armor = {
 	secondary_suffix_item_id: string;
 };
 
-type BackItem = {
+export type BackItem = {
 	/**
 	 * Infusion slots of the back item.
 	 */
@@ -379,19 +379,19 @@ type Weapon = {
 	secondary_suffix_item_id: string;
 };
 
-type CraftingMaterial = {
+export type CraftingMaterial = {
 	
 };
 
-type Miniature = {
+export type Miniature = {
 	
 };
 
-type Trophies = {
+export type Trophies = {
 	
 };
 
-type InfinixUpgrade = {
+export type InfinixUpgrade = {
 	/**
 	 * List of attribute bonuses.
 	 */
@@ -427,7 +427,7 @@ type InfinixUpgrade = {
 	};
 };
 
-type Infusion = {
+export type Infusion = {
 	/**
 	 * Infusion slot type of infusion upgrades. The array contains a maximum of one value. 
 	 * An empty array means an agony infusion slot. Possible values:
@@ -442,7 +442,7 @@ type Infusion = {
 	item_id?: number;
 };
 
-class ItemsClient extends Client<number, File> {
+export class ItemsClient extends Client<number, File> {
 	constructor() {
 		super(URI);
 	}

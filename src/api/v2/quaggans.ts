@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/quaggans`;
 
-type Quaggan = {
+export type Quaggan = {
 	/**
 	 * The quaggan identifier.
 	 */
@@ -14,7 +14,7 @@ type Quaggan = {
 	url: string;
 };
 
-class QuagganClient extends Client<string, Quaggan> {
+export class QuagganClient extends Client<string, Quaggan> {
 	constructor() {
 		super(URI);
 	}

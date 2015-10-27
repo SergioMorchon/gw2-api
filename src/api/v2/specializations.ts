@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/specializations`;
 
-type Specialization = {
+export type Specialization = {
 	/**
 	 * The specialization's ID.
 	 */
@@ -38,7 +38,7 @@ type Specialization = {
 	major_traits: number[];
 };
 
-class SpecializationClient extends Client<number, Specialization> {
+export class SpecializationClient extends Client<number, Specialization> {
 	constructor() {
 		super(URI);
 	}

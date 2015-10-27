@@ -3,7 +3,7 @@ import { BASE_URI } from "../config";
 
 const URI = `${BASE_URI}/v2/worlds`;
 
-type World = {
+export type World = {
 	/**
 	 * The world id.
 	 */
@@ -18,7 +18,7 @@ type World = {
 	population: string;
 };
 
-class WorldClient extends Client<number, World> {
+export class WorldClient extends Client<number, World> {
 	constructor() {
 		super(URI);
 	}
