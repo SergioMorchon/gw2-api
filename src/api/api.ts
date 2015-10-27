@@ -9,6 +9,7 @@ import quaggans from "./v2/quaggans";
 import files from "./v2/files";
 import achievements from "./v2/achievements";
 import traits from "./v2/traits";
+import items from "./v2/items";
 
 export {
 	build,
@@ -21,5 +22,6 @@ export {
 	quaggans,
 	files,
 	achievements,
-	traits
+	traits,
+	items
 };
