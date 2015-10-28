@@ -1,11 +1,11 @@
+import Client from "./client";
 import { BASE_URI } from "../config";
-import xhr from "../../xhr";
 
-const COLORS_URI = `${BASE_URI}/v2/colors`;
+const URI = `${BASE_URI}/v2/colors`;
 
-type RGB = [number, number, number];
+export type RGB = [number, number, number];
 
-type DetailedInformation = {
+export type DetailedInformation = {
 	/**
 	 * The brightness
 	 */
@@ -32,7 +32,11 @@ type DetailedInformation = {
 	rgb: RGB;
 }
 
-type Color = {
+export type Color = {
+	/**
+	 * The color id.
+	 */
+	id: number;
 	/**
 	 * The name of the dye.
 	 */
@@ -49,68 +53,10 @@ type Color = {
 	metal: DetailedInformation;
 };
 
-type ColorRequestMultiple = {
-	ids: string;
-	lang?: string;
-};
-
-type ColorIdsResponse = number[];
-
-
-function getColors(ids: number[], lang?: string) {
-	return new Promise<Color[]>((resolve, reject) => {
-		let request: xhr.Options = {
-			uri: COLORS_URI,
-			data: {
-				ids: ids.join()
-			}
-		};
-		if (lang) {
-			request.data.lang = lang;
-		}
-		xhr(request).then(response => {
-			resolve(<Color[]>JSON.parse(response));
-		}).catch(reject);
-	});
+export class ColorsClient extends Client<number, Color> {
+	constructor() {
+		super(URI);
+	}
 }
 
-function getColor(id: number, lang?: string) {
-	return new Promise<Color>((resolve, reject) => {
-		getColors([id], lang).then(colors => {
-			resolve(colors[0]);
-		}).catch(reject);
-	});
-}
-
-/**
- * This resource returns all dyes in the game, including localized names and their color component information.
- *
- * @see http://wiki.guildwars2.com/wiki/API:2/colors
- * @param id The color id.
- * @param lang The language to query the names for.
- */
-function get(id: number, lang?: string): Promise<Color>;
-/**
- * This resource returns all dyes in the game, including localized names and their color component information.
- *
- * @see http://wiki.guildwars2.com/wiki/API:2/colors
- * @param ids The color ids.
- * @param lang The language to query the names for.
- */
-function get(ids: number[], lang?: string): Promise<Color[]>;
-function get(idOrIds: number | number[], lang?: string): Promise<Color | Color[]> {
-	return Array.isArray(idOrIds)? getColors(<number[]>idOrIds) : getColor(<number>idOrIds);
-}
-
-function getIds() {
-	return new Promise<ColorIdsResponse>((resolve, reject) => {
-		xhr(COLORS_URI).then(response => {
-			resolve(<ColorIdsResponse>JSON.parse(response));
-		}).catch(reject);
-	});
-}
-
-export {
-	getIds,
-	get
-};
+export default new ColorsClient();

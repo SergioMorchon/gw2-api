@@ -3,6 +3,7 @@
 		"module": "commonjs",
 		"target": "ES5",
 		"noLib": true,
-		"outDir": "../build"
+		"outDir": "../build",
+		"declaration": true
 	}
 }
