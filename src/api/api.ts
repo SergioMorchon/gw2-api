@@ -10,6 +10,7 @@ import files from "./v2/files";
 import achievements from "./v2/achievements";
 import traits from "./v2/traits";
 import items from "./v2/items";
+import * as commerce from "./v2/commerce/commerce";
 
 export {
 	build,
@@ -23,5 +24,6 @@ export {
 	files,
 	achievements,
 	traits,
-	items
+	items,
+	commerce
 };
