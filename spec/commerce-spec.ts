@@ -65,4 +65,19 @@ describe("commerce", () => {
 			});
 		});
 	});
+
+	describe("exchange", () => {
+
+		describe("getAll", () => {
+
+			it("must get the exchanges", done => {
+				api.commerce.exchange.getAll().then(exchanges => {
+					expect(Array.isArray(exchanges)).toBe(true);
+					done();
+				}).catch(e => {
+					throw e;
+				});
+			});
+		});
+	});
 });
