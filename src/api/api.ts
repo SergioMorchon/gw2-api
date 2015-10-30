@@ -11,6 +11,7 @@ import achievements from "./v2/achievements";
 import traits from "./v2/traits";
 import items from "./v2/items";
 import * as commerce from "./v2/commerce/commerce";
+import * as wvw from "./v2/wvw/wvw";
 
 export {
 	build,
@@ -25,5 +26,6 @@ export {
 	achievements,
 	traits,
 	items,
-	commerce
+	commerce,
+	wvw
 };
