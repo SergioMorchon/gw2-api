@@ -1,10 +1,8 @@
 import Client from "../client";
 import { BASE_URI } from "../../config";
+import { Coord2D, Coord3D } from "../common";
 
 const URI = `${BASE_URI}/v2/wvw/objectives`;
-
-export type Coord3D = [number, number, number];
-export type Coord2D = [number, number, number];
 
 export type Objective = {
 	/**

@@ -13,6 +13,7 @@ import items from "./v2/items";
 import * as commerce from "./v2/commerce/commerce";
 import * as wvw from "./v2/wvw/wvw";
 import recipes from "./v2/recipes/recipes";
+import maps from "./v2/maps";
 
 export {
 	build,
@@ -29,5 +30,6 @@ export {
 	items,
 	commerce,
 	wvw,
-	recipes
+	recipes,
+	maps
 };
