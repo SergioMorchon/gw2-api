@@ -11,8 +11,9 @@
     "clean:build": "rimraf build",
     "bundle": "browserify --no-bundle-external -s gw2 build/main.js > build/gw2-api.js",
     "build:spec": "tsc -p spec",
-    "build": "tsc -p src && npm run bundle",
-    "test": "npm run build:spec && jasmine"
+    "build": "npm run clean:build && tsc -p src && npm run bundle",
+    "release": "npm run build && node tasks/release",
+    "test": "npm run clean:spec && npm run build:spec && jasmine"
   },
   "author": "Sergio Morchón Poveda",
   "license": "BSD-2-Clause",
@@ -20,6 +21,7 @@
     "browserify": "11.2.0",
     "jasmine": "2.3.2",
     "rimraf": "^2.4.3",
-    "typescript": "1.6.2"
+    "typescript": "1.6.2",
+    "vinyl-fs": "^2.2.1"
   }
 }

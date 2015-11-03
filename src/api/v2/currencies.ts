@@ -22,10 +22,10 @@ export type Currency = {
 	order: number;
 };
 
-export class CurrencyClient extends Client<number, Currency> {
+export class CurrenciesClient extends Client<number, Currency> {
 	constructor() {
 		super(URI);
 	}
 }
 
-export default new CurrencyClient();
+export default new CurrenciesClient();

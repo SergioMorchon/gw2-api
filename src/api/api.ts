@@ -10,6 +10,10 @@ import files from "./v2/files";
 import achievements from "./v2/achievements";
 import traits from "./v2/traits";
 import items from "./v2/items";
+import * as commerce from "./v2/commerce/commerce";
+import * as wvw from "./v2/wvw/wvw";
+import recipes from "./v2/recipes/recipes";
+import maps from "./v2/maps";
 
 export {
 	build,
@@ -23,5 +27,9 @@ export {
 	files,
 	achievements,
 	traits,
-	items
+	items,
+	commerce,
+	wvw,
+	recipes,
+	maps
 };
